@@ -1,0 +1,15 @@
+<header class="bg-success text-white text-center py-2">
+  <div class="container">
+    <div class="row d-flex justify-content-between">
+      <div class="col-md-4 flex justify-content-start">
+        <a routerLink="{{logoLink.link}}" class="logo">{{logoLink.name}}</a>
+      </div>
+
+      <div class="col-md-6 d-flex justify-content-center align-items-center">
+
+        <a *ngFor="let navigationLink of navigationLinks" routerLink="{{navigationLink.link}}"
+           class="text-white mx-2 fs-5 header-link col-md-3">{{navigationLink.name}}</a>
+      </div>
+    </div>
+  </div>
+</header>

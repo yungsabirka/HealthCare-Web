@@ -1,0 +1,59 @@
+<app-header [navigationLinks]="navigationLinks" [logoLink]="logoLink" />
+
+<div class="mx-auto text-center mt-4">
+  <h2>Welcome, {{userService.user.firstName}}!</h2>
+  <h4>Do you want to schedule an appointment?</h4>
+</div>
+<div class="container mt-5 d-flex mx-auto">
+  <div class="column d-flex flex-row align-items-start justify-content-between text-center col-md-6">
+    <div class="col-md-12 d-flex flex-column align-items-center mx-auto">
+      <div class="col-md-12 user-doctors-container">
+        <div class="mt-4">
+          <div class="mb-4">
+            <input [(ngModel)]="inputValue" type="text" class="form-control" placeholder="Search Specialization">
+          </div>
+          <div class="mb-4 cards-container d-flex flex-column">
+            <div class="card mb-4 doctor-card-container" #cardDiv
+                 *ngFor="let doctor of (doctors | filterSpecializations: inputValue | sliceArray: currentButtonNumber: step)"
+                 (click)="onSetCurrentDoctor(doctor, cardDiv)">
+              <div class="card-body">
+                <h5 class="card-title h4">{{doctor.name}}</h5>
+                <p class="card-text">Specialization: {{doctor.specialization}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="btn-group mt-3 col-md-6 w-100 d-flex justify-content-center" role="group"
+             *ngIf="buttonsAmount !== 1"
+        >
+          <button *ngFor="let number of getButtonsArray()"
+                  (click)="setCurrentButtonNumber(number + 1)"
+                  type="button" class="btn btn-primary btn-sm mx-1 page-button mb-4">{{number + 1}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isDoctorSelected" class="col-md-6 mx-4">
+    <form #form="ngForm" (submit)="onSubmit(form)">
+      <!-- Инпут для выбора даты -->
+      <div class="form-group">
+        <label for="appointmentDate">Select Appointment Date:</label>
+        <input type="date" id="appointmentDate" name="appointmentDate"
+               [min]="minDate()" class="form-control" [(ngModel)]="selectedDate" required
+               (ngModelChange)="generateAvailableTimes()"
+        >
+      </div>
+
+      <div class="form-group" *ngIf="availableTimes.length !== 0">
+        <label for="appointmentTime">Select Appointment Time:</label>
+        <select id="appointmentTime" name="appointmentTime" class="form-control" [(ngModel)]="selectedTime" [disabled]="!selectedDate" required>
+          <option *ngFor="let time of availableTimes" [value]="time">{{ time }}</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-success col-md-12 mt-4">Schedule Appointment</button>
+    </form>
+  </div>
+</div>
+
+

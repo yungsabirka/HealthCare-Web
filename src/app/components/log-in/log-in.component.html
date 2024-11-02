@@ -1,0 +1,35 @@
+<app-header [navigationLinks]="navigationLinks" [logoLink]="logoLink" />
+
+<form #form = "ngForm" (submit)="onSubmit(form)">
+  <div class="container mt-5 form-container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+
+        <div class="card register-container">
+          <div class="card-body">
+            <h2 class="text-center mb-4">Log in</h2>
+
+            <div class="inputs-container">
+              <div class="form-group">
+                <label  class="fs-5 mt-2" for="username">Username:</label>
+                <input type="text" #userName = "ngModel" [(ngModel)]="userService.user.userName" required
+                       name="userName" class="form-control form-control-lg" id="username" placeholder="Enter your username"
+                  maxlength="16">
+              </div>
+              <!-- Пароль -->
+              <div class="form-group">
+                <label  class="fs-5 mt-2" for="password">Password:</label>
+                <input type="password" #userPassword = "ngModel" [(ngModel)]="userService.user.password" required
+                       name="userPassword" class="form-control form-control-lg" id="password" placeholder="Enter your password"
+                  minlength="8" maxlength="16">
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block w-100 mt-4">Log in</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>

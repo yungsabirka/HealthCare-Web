@@ -1,0 +1,40 @@
+<app-header [navigationLinks]="navigationLinks" [logoLink]="logoLink" />
+
+<div class="container mt-5 doctors-container">
+  <h2 class="text-center">Doctors</h2>
+
+  <div class="row">
+    <div class="col-md-6">
+      <app-admin-doctors-form [currentDoctor]="currentDoctor"></app-admin-doctors-form>
+    </div>
+
+
+    <div class="col-md-6">
+      <div class="d-flex flex-column align-items-center justify-content-center">
+        <div class="mb-4">
+          <input [(ngModel)]="inputValue" type="text" class="form-control" placeholder="Search Doctors">
+        </div>
+        <div class="col-md-12 mb-4 cards-container d-flex flex-column">
+          <div class="card mb-4 cursor"
+               *ngFor="let doctor of (doctors | filterDoctors: inputValue | sliceArray: currentButtonNumber: step)"
+               (click)="onSetCurrentDoctor(doctor)">
+            <div class="card-body">
+              <h5 class="card-title h4">{{doctor.name}}</h5>
+              <p class="card-text">Specialization: {{doctor.specialization}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-group mt-3 col-md-6 w-100 d-flex justify-content-center" role="group"
+           *ngIf="buttonsAmount !== 1"
+      >
+        <button *ngFor="let number of getButtonsArray()"
+                (click)="setCurrentButtonNumber(number + 1)"
+                type="button" class="btn btn-primary btn-sm mx-1 page-button">{{number + 1}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

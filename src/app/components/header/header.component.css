@@ -1,0 +1,13 @@
+.logo{
+  font-size: 32px;
+  font-weight: 400;
+  user-select: none;
+  text-decoration: none;
+  color: white;
+}
+.header-link{
+  text-decoration: none;
+}
+.header-link:hover{
+  color: #000000;
+}

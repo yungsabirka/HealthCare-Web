@@ -1,0 +1,30 @@
+<form #form="ngForm" (submit)="onSubmit(form)">
+  <!--  <input type="hidden" name="patientId" [value]="patientService.formData.patientId">-->
+  <div class="row">
+    <div class="mb-3 col-6">
+      <label>Patient First Name</label>
+      <input class="form-control form-control-lg" placeholder="Enter a first name" required
+             #patientName="ngModel" [(ngModel)]="patientService.formData.firstName" name="patientName">
+    </div>
+    <div class="mb-3 col-6">
+      <label>Patient Last Name</label>
+      <input class="form-control form-control-lg" placeholder="Enter a last name" required
+             #patientLastName="ngModel" [(ngModel)]="patientService.formData.lastName" name="patientLastName">
+    </div>
+  </div>
+  <div class="mb-3">
+    <label>Patient Disease</label>
+    <input class="form-control form-control-lg" placeholder="Enter a disease" required
+           #patientDisease="ngModel" [(ngModel)]="patientService.formData.disease" name="patientDisease">
+  </div>
+  <div class="mb-3">
+    <label>Patient Treatment</label>
+    <input class="form-control form-control-lg" placeholder="Enter a treatment" required
+           #patientTreatment="ngModel" [(ngModel)]="patientService.formData.treatment" name="patientTreatment">
+  </div>
+  <div class="d-grid">
+    <input class="btn btn-lg btn-success" type="submit" value="Submit">
+  </div>
+</form>
+
+

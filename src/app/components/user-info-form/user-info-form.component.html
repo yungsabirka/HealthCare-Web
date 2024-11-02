@@ -1,0 +1,44 @@
+<app-header [navigationLinks]="navigationLinks" [logoLink]="logoLink" />
+
+<div class="container-fluid d-flex flex-column
+justify-content-start align-items-center vh-100 w-50 mt-4">
+  <h2>{{userService.user.userName}}</h2>
+  <h4>Update your info to continue:</h4>
+  <form #form="ngForm" (submit)="onSubmit(form)" class="w-100">
+    <div class="row d-flex flex-column">
+      <div class="mb-3 col-12">
+        <label>First Name</label>
+        <input class="form-control form-control-lg" placeholder="Enter your first name" required
+               #userFirstName="ngModel" [(ngModel)]="userService.user.firstName" name="userFirstName">
+      </div>
+      <div class="mb-3 col-12">
+        <label>Last Name</label>
+        <input class="form-control form-control-lg" placeholder="Enter your last name" required
+               #userLastName="ngModel" [(ngModel)]="userService.user.lastName" name="userLastName">
+      </div>
+      <div class="mb-3 col-12">
+        <label>Date of Birth</label>
+        <input class="form-control form-control-lg" placeholder="Enter your date of birth" required
+               #userDateOfBirth="ngModel" [(ngModel)]="userService.user.dateOfBirth" name="userDateOfBirth"
+               type = "date"
+        >
+      </div>
+      <div class="mb-3 col-12">
+        <label>Gender</label>
+        <select class="form-control form-control-lg" required
+                [(ngModel)]="userService.user.gender" name="userGender">
+          <option [ngValue]="true">Male</option>
+          <option [ngValue]="false">Female</option>
+        </select>
+      </div>
+      <div class="mb-3 col-12">
+        <label>Address</label>
+        <input class="form-control form-control-lg" placeholder="Enter your address" required
+               #userAddress="ngModel" [(ngModel)]="userService.user.address" name="userAddress">
+      </div>
+    </div>
+    <div class="d-grid">
+      <input class="btn btn-lg btn-success mb-2" type="submit" value="Submit">
+    </div>
+  </form>
+</div>

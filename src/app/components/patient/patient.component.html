@@ -1,0 +1,27 @@
+<div class="bg-body-secondary text-center py-5 rounded-2">
+  <h1 class="display-6 fw-bold"> Patient Register </h1>
+</div>
+
+<div class="row mt-5">
+  <div class="col-6">
+    <app-patient-form></app-patient-form>
+  </div>
+  <div class="col-6">
+    <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-start mb-2 border px-4 py-3 rounded"
+          *ngFor="let patient of patientService.list">
+        <div class="flex-grow-1 mouse-hover"
+        (click) = "populateForm(patient)">
+          <div class="fw-bold">{{patient.firstName}}  {{patient.lastName}}</div>
+          <div class="fw-bold">Disease: {{patient.disease}}</div>
+        </div>
+        <span class="text-secondary">
+          <i class="fa-solid fa-trash fa-lg mouse-hover"
+          (click)="onDelete(patient.patientId)"></i>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+

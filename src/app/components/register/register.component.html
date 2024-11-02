@@ -1,0 +1,58 @@
+<app-header [navigationLinks]="navigationLinks" [logoLink]="logoLink" />
+
+<form #form="ngForm" (submit)="onRegister(form)"
+  [class.submited] = "formSubmitted" novalidate>
+  <div class="container mt-5 form-container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+
+        <div class="card register-container">
+          <div class="card-body">
+            <h2 class="text-center mb-4">Sign up</h2>
+
+            <div class="inputs-container">
+              <div class="form-group">
+                <label class="fs-5 mt-2" for="username">Username:</label>
+                <input type="text" #userName="ngModel" [(ngModel)]="newUser.userName" required
+                       name="userName" class="form-control form-control-lg" id="username"
+                       placeholder="Enter your username"
+                       maxlength="16">
+              </div>
+              <div *ngIf="userName.invalid && (userName.dirty || userName.touched)" class="valid-error">
+                <div *ngIf="userName.hasError('required')">Username is required.</div>
+              </div>
+
+              <!-- Email -->
+              <div class="form-group">
+                <label class="fs-5 mt-2" for="email">Email:</label>
+                <input type="email" #userEmail="ngModel" [(ngModel)]="newUser.email" required
+                       name="userEmail" class="form-control form-control-lg" id="email" placeholder="Enter your email"
+                       maxlength="50" [pattern]="patternEmail">
+              </div>
+              <div *ngIf="userEmail.invalid && (userEmail.dirty || userEmail.touched)" class="valid-error">
+                <div *ngIf="userEmail.hasError('required')">Email is required.</div>
+                <div *ngIf="userEmail.hasError('pattern')">Email is not valid.</div>
+              </div>
+
+              <div class="form-group">
+                <label class="fs-5 mt-2" for="password">Password:</label>
+                <input type="password" #userPassword="ngModel" [(ngModel)]="newUser.password" required
+                       name="userPassword" class="form-control form-control-lg" id="password"
+                       placeholder="Enter your password"
+                       minlength="8" maxlength="16">
+              </div>
+              <div *ngIf="userPassword.invalid && (userPassword.dirty || userPassword.touched)" class="valid-error">
+                <div *ngIf="userPassword.hasError('required')">Password is required.</div>
+                <div *ngIf="userPassword.hasError('minlength')">Password must be at least 8 characters.</div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block w-100 mt-4">Register</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</form>
+

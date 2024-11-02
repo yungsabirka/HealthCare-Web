@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, NgModule} from '@angular/core';
+import {RouterModule, Routes} from "@angular/router";
+import {SliceArrayPipe} from "./pipes/slice-array.pipe";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Project.Angular';
+  title = 'HealthCare';
 }

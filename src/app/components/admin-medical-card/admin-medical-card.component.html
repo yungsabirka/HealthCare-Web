@@ -1,0 +1,91 @@
+<app-header [navigationLinks]="navigationLinks" [logoLink]="logoLink"/>
+<div class="row justify-content-center mt-4 ">
+  <div class="col-md-4 mb-4 cards-container d-flex flex-column">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title h4">Edit Medical Card</h5>
+        <form #form="ngForm" (submit)="onSubmit(form)">
+          <div class="mb-3">
+            <label for="editDiseases">Diseases</label>
+            <input id="editDiseases" class="form-control" [(ngModel)]="medicalCardService.medicalCard.diseases"
+                   name="diseases" required
+            >
+          </div>
+          <div class="mb-3">
+            <label for="editDescription">Description</label>
+            <input id="editDescription" class="form-control" [(ngModel)]="medicalCardService.medicalCard.description"
+                   name="description" required
+            >
+          </div>
+          <div class="mb-3">
+            <label for="editTreatment">Treatment</label>
+            <input id="editTreatment" class="form-control" [(ngModel)]="medicalCardService.medicalCard.treatment"
+                   name="treatment" required
+            >
+          </div>
+          <div class="mb-3">
+            <label for="editTestResult">Test Result</label>
+            <input id="editTestResult" class="form-control" [(ngModel)]="medicalCardService.medicalCard.testResults"
+                   name="testResult" required
+            >
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="col-md-12 mb-4 cards-container d-flex flex-column">
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="d-flex justify-content-center align-items-center">
+            <h5 class="card-title h4">{{ currentPatient.firstName }}</h5>
+            <h5 class="card-title mx-2 h4">{{ currentPatient.lastName }}</h5>
+          </div>
+          <div class="d-flex justify-content-around">
+            <div>
+              <p class="card-text">Gender: {{ currentPatient.gender ? 'Male' : 'Female' }}</p>
+              <p class="card-text">Email: {{ currentPatient.email }}</p>
+            </div>
+            <div>
+              <p class="card-text">Address: {{ currentPatient.address }}</p>
+              <p class="card-text">Age: {{ calculateUserAge(currentPatient.dateOfBirth) }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mb-4 cards-container d-flex flex-column" *ngIf="currentPatient.medicalCardId !== 1">
+      <div class="card mb-4">
+        <div class="card-body">
+
+          <h5 class="card-title h4">Medical Card Information</h5>
+          <p class="card-text"><strong>Diseases:</strong> {{userMedicalCard.diseases }}</p>
+          <p class="card-text"><strong>Description:</strong> {{userMedicalCard.description }}</p>
+          <p class="card-text"><strong>Treatment:</strong> {{userMedicalCard.treatment }}</p>
+          <p class="card-text"><strong>Test Results:</strong> {{userMedicalCard.testResults }}</p>
+          <p class="card-text"><strong>Prescribed Medications:</strong>
+            <span *ngFor="let medicationId of patientMedicationIdList">
+              {{getMedicationById(medicationId)}},
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mb-4 cards-container d-flex flex-column" *ngIf="currentPatient.medicalCardId === 1">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title h4">This user still does not have medical card, add it</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-around">
+  <app-patient-medications [patientMedicalCardId]="currentPatient.medicalCardId"
+                           (medicationsChange)="onMedicationsChange($event)"
+                           (patientMedicationIdListChange)="onPatientMedicationIdListChange($event)"
+  />
+  <app-appointment [currentUser]="currentPatient" [noAppointmentMessage]="noAppointmentMessage" [title]="title"/>
+</div>

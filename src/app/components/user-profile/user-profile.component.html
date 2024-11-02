@@ -1,0 +1,17 @@
+<app-header [navigationLinks]="navigationLinks" [logoLink]="logoLink" />
+<h5 class="mx-auto w-25 text-center mt-4">Your User Profile</h5>
+
+<div class="container  vh-100 w-25">
+  <div class="card">
+    <div class="card-body">
+      <p class="card-text"><strong>User Name:</strong> {{ userService.user.userName }}</p>
+      <p class="card-text"><strong>First Name:</strong> {{ userService.user.firstName }}</p>
+      <p class="card-text"><strong>Last Name:</strong> {{ userService.user.lastName }}</p>
+      <p class="card-text"><strong>Email:</strong> {{ userService.user.email }}</p>
+      <p class="card-text"><strong>Gender:</strong> {{ userService.user.gender ? 'Male' : 'Female' }}</p>
+      <p class="card-text"><strong>Date of Birth:</strong> {{ userService.user.dateOfBirth | date:'yyyy-MM-dd' }}</p>
+      <p class="card-text"><strong>Address:</strong> {{ userService.user.address }}</p>
+      <button class="btn btn-primary" routerLink="/userInfoForm">Edit Profile</button>
+    </div>
+  </div>
+</div>

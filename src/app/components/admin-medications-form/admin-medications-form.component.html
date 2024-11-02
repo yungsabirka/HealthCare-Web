@@ -1,0 +1,31 @@
+<h2>Medication Controller</h2>
+<h4>You can add or update medications in columns below:</h4>
+<form #form="ngForm" (submit)="onSubmit(form)">
+  <!--  <input type="hidden" name="patientId" [value]="patientService.formData.patientId">-->
+  <div class="row d-flex flex-column">
+    <div class="mb-3 col-12">
+      <label>Medication Name</label>
+      <input class="form-control form-control-lg w-100" placeholder="Enter a medication name" required
+             #medicationName="ngModel" [(ngModel)]="currentMedication.medicationName" name="medicationName">
+    </div>
+    <div class="mb-3 col-12">
+      <label>Medication description</label>
+      <input class="form-control form-control-lg" placeholder="Enter a medication description" required
+             #medicationDescription="ngModel" [(ngModel)]="currentMedication.description" name="medicationDescription">
+    </div>
+    <div class="mb-3 col-12">
+      <label>Medication type</label>
+      <input class="form-control form-control-lg" placeholder="Enter a medication type" required
+             #medicationType="ngModel" [(ngModel)]="currentMedication.type" name="medicationType">
+    </div>
+    <div class="mb-3 col-12">
+      <label>Medication contraindications</label>
+      <input class="form-control form-control-lg" placeholder="Enter a medication contraindications" required
+             #medicationContraindications="ngModel" [(ngModel)]="currentMedication.contraindications" name="medicationContraindications">
+    </div>
+  </div>
+  <div class="d-grid">
+    <input class="btn btn-lg btn-success mb-2" type="submit" value="Submit">
+    <input class="btn btn-lg btn-danger" value="Delete" (click)="onDeleteMedication(form)">
+  </div>
+</form>
